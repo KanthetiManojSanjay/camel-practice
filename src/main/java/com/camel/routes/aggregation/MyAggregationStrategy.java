@@ -1,4 +1,4 @@
-package com.camel.routes;
+package com.camel.routes.aggregation;
 
 import org.apache.camel.Exchange;
 

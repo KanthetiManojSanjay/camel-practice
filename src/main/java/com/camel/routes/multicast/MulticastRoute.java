@@ -1,10 +1,9 @@
-package com.camel.routes;
+package com.camel.routes.multicast;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author kansanja on 24/12/21.
  */
 
-@Component
+//@Component
 public class MulticastRoute extends RouteBuilder {
 
     @Override

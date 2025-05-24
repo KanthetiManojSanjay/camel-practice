@@ -1,16 +1,17 @@
 package com.camel.routes;
 
+import com.camel.routes.contentbasedrouter.ChoiceRoute;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.test.junit5.CamelTestSupport;
+import org.assertj.core.util.Maps;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
 import static org.apache.camel.builder.AdviceWith.adviceWith;
-import static org.assertj.core.util.Maps.newHashMap;
 
 /**
  * @author kansanja on 24/12/21.
@@ -30,7 +31,7 @@ public class ChoiceRouteTest extends CamelTestSupport {
 
         context.start();
         String body = "Airpods";
-        Map<String, Object> headers = newHashMap("inventory", "gadget");
+        Map<String, Object> headers = Maps.newHashMap("inventory", "gadget");
         template.sendBodyAndHeaders("direct:orders", body, headers);
         assertAllSatisfied(mockGadget, mockWidget, mockGeneral);
     }
@@ -46,7 +47,7 @@ public class ChoiceRouteTest extends CamelTestSupport {
         context.start();
 
         String body = "Amazon";
-        Map<String, Object> headers = newHashMap("inventory", "widget");
+        Map<String, Object> headers = Maps.newHashMap("inventory", "widget");
         template.sendBodyAndHeaders("direct:orders", body, headers);
 
         assertAllSatisfied(mockGadget, mockWidget, mockGeneral);
@@ -61,7 +62,7 @@ public class ChoiceRouteTest extends CamelTestSupport {
         context.start();
 
         String body = "T-Shirt";
-        Map<String, Object> headers = newHashMap("inventory", "general");
+        Map<String, Object> headers = Maps.newHashMap("inventory", "general");
         template.sendBodyAndHeaders("direct:orders", body, headers);
 
         assertAllSatisfied(mockGadget, mockWidget, mockGeneral);

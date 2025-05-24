@@ -1,5 +1,23 @@
+server:
+  port: 8081
+
 camel:
-  component:
-    servlet:
-      mapping:
-        context-path: /services/*
+  servlet:
+    mapping:
+      context-path: /services/*
+
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    name: h2
+    url: jdbc:h2:mem:sanjay
+
+com.camel:
+  seda:
+    enabled: false
+  error-handlers:
+    enabled: false
+  error-handlers1:
+    enabled: false

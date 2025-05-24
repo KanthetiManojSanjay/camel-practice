@@ -1,4 +1,4 @@
-package com.camel.components.rest;
+package com.camel.routes.rest;
 
 import com.camel.dto.WeatherDto;
 import org.apache.camel.Exchange;
@@ -6,7 +6,6 @@ import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.DefaultMessage;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
@@ -16,7 +15,7 @@ import static org.apache.camel.Exchange.HTTP_RESPONSE_CODE;
  * @author kansanja on 23/12/21.
  */
 
-@Component
+//@Component
 public class RestJavaDsl extends RouteBuilder {
 
 

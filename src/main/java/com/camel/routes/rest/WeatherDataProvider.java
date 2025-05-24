@@ -1,4 +1,4 @@
-package com.camel.components.rest;
+package com.camel.routes.rest;
 
 import com.camel.dto.WeatherDto;
 import org.springframework.stereotype.Component;

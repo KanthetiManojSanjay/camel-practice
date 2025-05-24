@@ -1,4 +1,4 @@
-package com.camel.routes;
+package com.camel.routes.rabbitmq;
 
 import com.camel.dto.WeatherDto;
 import org.apache.camel.Exchange;
@@ -7,14 +7,13 @@ import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.support.DefaultMessage;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 /**
  * @author kansanja on 24/12/21.
  */
-@Component
+//@Component
 public class WeatherRoute extends RouteBuilder {
 
     @Override

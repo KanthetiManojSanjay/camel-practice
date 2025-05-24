@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author kansanja on 23/12/21.
  */
-@Configuration
+//@Configuration
 public class CamelConfiguration {
     public static final String RABBIT_URI = "rabbitmq:amq.direct?queue=%s&routingKey=%s&autoDelete=false";
 

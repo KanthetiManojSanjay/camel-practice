@@ -4,11 +4,13 @@ import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit5.CamelTestSupport;
+import org.apache.camel.test.spring.junit5.MockEndpoints;
 import org.junit.jupiter.api.Test;
 
 /**
  * @author kansanja on 24/12/21.
  */
+@MockEndpoints()
 public class HelloRouteJunitMockTest extends CamelTestSupport {
     @Override
     protected RoutesBuilder createRouteBuilder() throws Exception {

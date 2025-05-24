@@ -1,26 +1,28 @@
-package com.camel.routes;
+package com.camel.routes.contentbasedrouter;
 
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
-import org.springframework.stereotype.Component;
+
+import static org.apache.camel.LoggingLevel.ERROR;
 
 /**
  * @author kansanja on 24/12/21.
  */
-@Component
+//@Component
 public class HelloRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
         from("direct:greeting").id("greeting")
+                .log(ERROR,"Hello ${body}")
                 .choice()
                 .when().simple("${body} contains 'Team'")
-                .log(LoggingLevel.ERROR, "I like working in teams")
+                    .log(ERROR, "I like working in teams")
                 .otherwise()
-                .log(LoggingLevel.ERROR, "Solo fighter")
+                    .log(ERROR, "Solo fighter")
                 .end()
                 .to("direct:finishGreeting");
+
         from("direct:finishGreeting")
-                .log(LoggingLevel.ERROR, "Bye ${body}");
+                .log(ERROR, "Bye ${body}");
     }
 }
