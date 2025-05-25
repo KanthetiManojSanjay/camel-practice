@@ -12,6 +12,7 @@ import org.apache.camel.model.rest.RestBindingMode;
 import org.apache.camel.model.rest.RestParamType;
 import org.apache.camel.spi.RoutePolicy;
 import org.apache.camel.support.DefaultMessage;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,7 @@ import static org.apache.camel.model.rest.RestParamType.body;
  * @author kansanja on 23/12/21.
  */
 @Component
+@ConditionalOnProperty(name = "com.camel.publish-restdsl.enabled", havingValue = "true")
 public class RestDsl extends RouteBuilder {
     private final WeatherDataProvider weatherDataProvider;
 

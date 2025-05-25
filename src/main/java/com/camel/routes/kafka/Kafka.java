@@ -2,13 +2,16 @@ package com.camel.routes.kafka;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 /**
  * @author kansanja on 08/02/22.
  */
-//@Component
+@Component
+@ConditionalOnProperty(name = "com.camel.kafka.enabled", havingValue = "true")
 public class Kafka extends RouteBuilder {
 
     final String KAFKA_ENDPOINT = "kafka:%s?brokers=localhost:9092";

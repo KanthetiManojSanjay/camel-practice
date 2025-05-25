@@ -23,3 +23,27 @@ com.camel:
     enabled: false
   aggregator:
     enabled: false
+  splitter:
+    enabled: false
+  bean-test:
+    enabled: false
+  choice:
+    enabled: false
+  file:
+    enabled: false
+  jms:
+    enabled: false
+  kafka:
+    enabled: false
+  multicast:
+    enabled: false
+  rabbitmq:
+    enabled: false
+  wiretap:
+    enabled: false
+  consume-rest:
+    enabled: false
+  publish-restdsl:
+    enabled: false
+  publish-rest-javadsl:
+    enabled: false

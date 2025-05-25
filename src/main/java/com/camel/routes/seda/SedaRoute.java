@@ -5,6 +5,7 @@ import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.support.DefaultMessage;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author kansanja on 24/12/21.
  */
-//@Component
+@Component
 @ConditionalOnProperty(name = "com.camel.seda.enabled", havingValue = "true", matchIfMissing = true)
 public class SedaRoute extends RouteBuilder {
     @Override

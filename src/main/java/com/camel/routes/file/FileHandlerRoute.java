@@ -3,10 +3,14 @@ package com.camel.routes.file;
 import com.camel.processor.MaskSensitiveInfo;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 /**
  * @author kansanja on 24/05/25.
  */
+@Component
+@ConditionalOnProperty(name = "com.camel.file.enabled", havingValue = "true")
 public class FileHandlerRoute extends RouteBuilder {
 
     public static final String APPEND = "&fileExist=Append";

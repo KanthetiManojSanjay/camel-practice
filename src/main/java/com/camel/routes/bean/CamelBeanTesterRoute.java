@@ -3,6 +3,7 @@ package com.camel.routes.bean;
 import org.apache.camel.Handler;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,7 +11,8 @@ import java.util.Date;
 /**
  * @author kansanja on 24/05/25.
  */
-//@Component
+@Component
+@ConditionalOnProperty(name = "com.camel.bean-test.enabled", havingValue = "true")
 public class CamelBeanTesterRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {

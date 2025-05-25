@@ -4,12 +4,16 @@ package com.camel.routes.splitter;
 import com.camel.dto.CustomerOrders;
 import com.camel.dto.Order;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author kansanja on 25/05/25.
  */
+@Component
+@ConditionalOnProperty(name = "com.camel.splitter.enabled", havingValue = "true")
 public class SplitterRoute extends RouteBuilder {
 
     @Override

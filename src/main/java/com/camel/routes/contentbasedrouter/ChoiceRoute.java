@@ -2,11 +2,14 @@ package com.camel.routes.contentbasedrouter;
 
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 /**
  * @author kansanja on 24/12/21.
  */
-//@Component
+@Component
+@ConditionalOnProperty(name = "com.camel.choice.enabled", havingValue = "true")
 public class ChoiceRoute extends RouteBuilder {
 
     @Override

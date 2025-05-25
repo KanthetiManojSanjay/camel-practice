@@ -5,6 +5,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.apache.camel.spi.RoutePolicy;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.Date;
  * @author kansanja on 25/05/25.
  */
 @Component
+@ConditionalOnProperty(name = "com.camel.consume-rest.enabled", havingValue = "true")
 public class ConsumeRestApi extends RouteBuilder {
 
     JacksonDataFormat jacksonDataFormat = new JacksonDataFormat(WeatherDto.class);
