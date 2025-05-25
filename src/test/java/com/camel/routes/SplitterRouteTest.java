@@ -1,9 +1,9 @@
 package com.camel.routes;
 
-import lombok.Builder;
-import lombok.Data;
+import com.camel.dto.CustomerOrders;
+import com.camel.dto.Order;
+import com.camel.routes.splitter.SplitterRoute;
 import org.apache.camel.RoutesBuilder;
-import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit5.CamelTestSupport;
 import org.junit.jupiter.api.Test;
@@ -20,6 +20,12 @@ import java.util.List;
  * Splitter - Through this pattern we can split Collection/List/Set/Map/Array/Iterator/Iterable/NodeList(xml)/String
  */
 public class SplitterRouteTest extends CamelTestSupport {
+
+    @Override
+    protected RoutesBuilder createRouteBuilder() throws Exception {
+        return new SplitterRoute();
+    }
+
 
     @Test
     void splitEip() throws Exception {
@@ -48,59 +54,5 @@ public class SplitterRouteTest extends CamelTestSupport {
         assertMockEndpointsSatisfied();
     }
 
-    @Override
-    protected RoutesBuilder createRouteBuilder() throws Exception {
-        return new RouteBuilder() {
-            @Override
-            public void configure() throws Exception {
 
-                //Simple split
-                from("direct:start")
-                        .log("Before split ${body}")
-                        .split(body()).delimiter("#") // By default delimiter is comma which need not be specified explicitly
-                        .log("Split line ${body}")
-                        .to("mock:split");
-
-                //Complex split
-                from("direct:customerOrder")
-                        .log("CustomerId: ${body.customerId}")
-                        //Below are different approaches
-//                        .split(simple("${body.orders}"))
-//                        .split(method(OrderService.class))
-                        .split(method(OrderService.class, "getOrders"))
-                        .log("Order: ${body}");
-
-                //Splitter & Aggregation together
-                from("direct:customerOrderAggregate")
-                        .log("${body}")
-                        .split(body(), new WordAggregationStrategy()).stopOnException()
-                            .bean(WordTranslateBean.class).to("mock:split")
-                        .end()
-                        .log("Aggregated ${body}")
-                        .to("mock:aggregatedResult");
-            }
-        };
-    }
-
-    static class OrderService {
-        public static List<Order> getOrders(CustomerOrders customerOrders) {
-            return customerOrders.getOrders();
-
-        }
-    }
-
-    @Data
-    @Builder
-    static class CustomerOrders {
-        private String customerId;
-        private List<Order> orders;
-    }
-
-
-    @Data
-    @Builder
-    static class Order {
-        private String orderId;
-        private List<String> items;
-    }
 }

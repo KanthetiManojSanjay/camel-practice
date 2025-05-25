@@ -1,4 +1,4 @@
-package com.camel.routes;
+package com.camel.routes.splitter;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.camel.routes;
+package com.camel.routes.splitter;
 
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;

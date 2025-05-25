@@ -3,14 +3,19 @@ package com.camel.routes.aggregation;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Random;
 
+import static org.apache.camel.LoggingLevel.ERROR;
+
 /**
  * @author kansanja on 24/12/21.
  */
-//@Component
+@Component
+@ConditionalOnProperty(name = "com.camel.aggregator.enabled", havingValue = "true")
 public class AggregatorRoute extends RouteBuilder {
 
     private static final String CORRELATION_ID = "correlationId";
@@ -25,6 +30,6 @@ public class AggregatorRoute extends RouteBuilder {
                 })
                 .aggregate(header(CORRELATION_ID), new MyAggregationStrategy())
                 .completionSize(3)
-                .log(LoggingLevel.ERROR, "${header." + CORRELATION_ID + "} ${body}");
+                .log(ERROR, "${header." + CORRELATION_ID + "} ${body}");
     }
 }

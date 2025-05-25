@@ -21,3 +21,5 @@ com.camel:
     enabled: false
   error-handlers1:
     enabled: false
+  aggregator:
+    enabled: false
