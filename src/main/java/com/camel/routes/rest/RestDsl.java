@@ -2,10 +2,15 @@ package com.camel.routes.rest;
 
 import com.camel.dto.WeatherDto;
 import org.apache.camel.Exchange;
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.component.jackson.JacksonDataFormat;
+import org.apache.camel.model.dataformat.JsonDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.camel.model.rest.RestBindingMode;
+import org.apache.camel.model.rest.RestParamType;
+import org.apache.camel.spi.RoutePolicy;
 import org.apache.camel.support.DefaultMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +20,7 @@ import java.util.Objects;
 
 import static com.camel.config.CamelConfiguration.RABBIT_URI;
 import static org.apache.camel.Exchange.HTTP_RESPONSE_CODE;
+import static org.apache.camel.model.rest.RestParamType.body;
 
 
 /**
@@ -58,11 +64,15 @@ public class RestDsl extends RouteBuilder {
         ;
 
         from("direct:save-weather-data")
+                .routeId("saveWeatherData")
+                .log(LoggingLevel.INFO,"saveWeatherData ${body}")
                 .process(this::saveWeatherDataAndSetToExchange);
 
         from("direct:get-weather-data")
-                .process(this::getWeatherData)
-                .wireTap("direct:write-to-rabbit");
+                .routeId("getWeatherData")
+                .log(LoggingLevel.INFO,"getWeatherData for city: ${header.city}")
+                .process(this::getWeatherData);
+//                .wireTap("direct:write-to-rabbit");
 
         from("direct:write-to-rabbit")
                 .marshal().json(JsonLibrary.Jackson, WeatherDto.class)
